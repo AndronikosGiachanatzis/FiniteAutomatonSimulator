@@ -1,4 +1,5 @@
 import graph as gr
+VERBOSE = True
 
 def printDescription(description_dict):
     print ("[!] Total states:", description_dict["states_num"])
@@ -9,6 +10,7 @@ def printDescription(description_dict):
     print("[!] Transitions: ", description_dict["transitions"])
 
 
+
 def main():
     # read the description of the automaton from a given file
     # the dictionary that saves the description of the automaton
@@ -16,8 +18,7 @@ def main():
     while True:
         try:
             description_filename = input("Enter the name of the file containing the description: ")
-            # desc_file = open(description_filename)
-            desc_file = open("description.txt")
+            desc_file = open(description_filename)
         except FileNotFoundError:
             print("[-] File not found")
         else:
@@ -39,6 +40,20 @@ def main():
 
     graph = gr.Graph(description_dict)
 
+    while True:
+        # read input
+        word = input("Enter the word: ")
+        result = graph.traverse(word)
+
+        if result:
+            print(f"[+] The word {word} is valid")
+        else:
+            print(f"[+] The word {word} is not valid")
+
+        choice = input("Do you want to add another word? y/n: ")
+        print()
+        if choice == 'n':
+            break
 
 
 

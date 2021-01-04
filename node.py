@@ -15,3 +15,11 @@ class Node:
         self.transitions[input_char].append(end)
 
 
+    def getDestinations(self, character):
+        if character in self.transitions:
+            return self.transitions[character]
+        else:
+            return []
+
+    def __str__(self):
+        return (f"Node: {self.name}")
