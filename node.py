@@ -1,3 +1,6 @@
+EMPTY_WORD = '@'
+
+
 class Node:
 
     def __init__(self, name, state):
@@ -23,3 +26,16 @@ class Node:
 
     def __str__(self):
         return (f"Node: {self.name}")
+
+
+    def getEDestinations(self):
+        nxt = list()
+        if EMPTY_WORD in self.transitions:
+            for t in self.transitions[EMPTY_WORD]:
+                nxt.extend(t.getEDestinations())
+                if t not in nxt:
+                    nxt.append(t)
+                nxt.reverse()
+                return nxt
+        else:
+            return []

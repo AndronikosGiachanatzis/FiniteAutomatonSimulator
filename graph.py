@@ -1,7 +1,6 @@
 import node as nd
 from main import VERBOSE
 
-EMPTY_WORD = '@'
 
 class Graph:
 
@@ -70,6 +69,9 @@ class Graph:
         curr_states.append(init)
         valid = True
 
+        nxt_e = list()
+        nxt_e.extend(curr_states[0].getEDestinations())
+        curr_states.extend(nxt_e)
         # traverse through the graph starting from the initial node
         for c in word:
             # get a list of the next nodes for a given character
@@ -83,15 +85,19 @@ class Graph:
                 curr_states.pop(0)
 
             # if there is not a possible destination from all the current nodes, the word is not valid
-            if nxt == []:
+            if nxt == [] and nxt_e == []:
                 valid = False
                 break
 
             # add the destinations to the possible current states
             curr_states.extend(nxt)
 
-
-
+            if len(curr_states) > 0:
+                nxt_e = list()
+                nxt_e.extend(curr_states[0].getEDestinations())
+                curr_states.extend(nxt_e)
+            else:
+                break
 
 
         # check if there weren't any destination nodes
