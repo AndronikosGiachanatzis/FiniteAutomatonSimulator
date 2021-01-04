@@ -73,18 +73,26 @@ class Graph:
         # traverse through the graph starting from the initial node
         for c in word:
             # get a list of the next nodes for a given character
-            nxt = curr_states[0].getDestinations(c)
-            if VERBOSE:
-                print(f"Character: {c} \nCurrent Node: {curr_states[0]}")
+            nxt = list()
+            tmp_curr = curr_states.copy()
+            for s in tmp_curr:
+
+                nxt.extend(curr_states[0].getDestinations(c))
+
+                # remove the current node from the current states
+                curr_states.pop(0)
+
+            # if there is not a possible destination from all the current nodes, the word is not valid
             if nxt == []:
                 valid = False
                 break
 
             # add the destinations to the possible current states
-            curr_states.append(*nxt)
+            curr_states.extend(nxt)
 
-            # remove the current node from the current states
-            curr_states.pop(0)
+
+
+
 
         # check if there weren't any destination nodes
         if valid:
