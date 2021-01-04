@@ -1,0 +1,11 @@
+3   # The automaton has 3 states
+1   # The initial state is the state 1
+1   # There is 1 final state
+3   # The final state is the state 3
+6   # There are 6 transitions
+1 a 2   # There is a transition from the state 1 to the state 2 when the character 'a' is read
+1 b 1   # There is a transition from the state 1 to the state 1 when the character 'b' is read
+2 a 3   # There is a transition from the state 2 to the state 3 when the character 'a' is read
+2 b 1   # There is a transition from the state 2 to the state 1 when the character 'b' is read
+3 a 3   # There is a transition from the state 3 to the state 3 when the character 'a' is read
+3 b 1   # There is a transition from the state 3 to the state 1 when the character 'b' is read
