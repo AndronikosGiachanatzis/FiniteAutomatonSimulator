@@ -1,13 +1,18 @@
 import node as nd
-from main import VERBOSE
 
-
+'''
+    This class is used to modelize a graph that holds all information relevant to an automaton.
+    It carries information concerning te total number of the states of a graph, the number of the final states, 
+    which state is the initial and which are the final states as well as the transitions between states.
+    Each state is modelized by the Node class in the node.py module and henceforth the terms Node and State will
+    be used identically. 
+    At any given moment only one instance of this class is expected to exist as the simulator accepts one description
+    file of one automaton. 
+'''
 class Graph:
 
-    # input the description
     def __init__(self, desc_dict):
         self.states_num = desc_dict["states_num"]
-        # convert the initial state to Node?? (as well as the list of the final states)
         self.initial_state = desc_dict["initial_state"]
         self.final_states_num = desc_dict["final_states_num"]
         self.final_states = desc_dict["final_states"].split()
@@ -48,7 +53,7 @@ class Graph:
     def searchNode(self, target):
         '''
         Searches the nodes o a graph for a given node that is identified by its name
-        :param target (str): The name of the target node
+        :param target (String): The name of the target node
         :return: The node if the node has been found found, or None if the node has not been found
         '''
         for n in self.nodes:
@@ -58,9 +63,19 @@ class Graph:
 
 
     def getInitialNode(self):
+        '''
+        Searches for the initial/starting node of the graph.
+        :return (Node): The initial node of the graph.
+        '''
         return self.searchNode(self.initial_state)
 
     def traverse(self, word):
+        '''
+        Traverses a graph, starting from the initial node according to the user's input and checks whether the word
+        entered is a word that the automaton accepts or not.
+        :param word (String): The word that the user entered to be checked whether it's a valid word or not
+        :return (Boolean): True if the word entered is a valid word. False if the word entered is invalid
+        '''
         # keep a list of all the possible states that the automaton is in
         curr_states = list()
 
